@@ -276,6 +276,8 @@ void SList::Add(int val, int idx) {
 void SList::Remove(int idx) {
     Node* temp;
     temp = head;
+    Node* before;
+    before = new Node();
     Node* after;
     after = new Node();
 
@@ -288,14 +290,14 @@ void SList::Remove(int idx) {
     }
     else {
         
-        for (int i = 0; i < idx; ++i) {
+        for (int i = 0; i<idx - 1; ++i){
             temp = temp->GetLink_Next();
-            after = temp->GetLink_Next()->GetLink_Next();
         }
 
-        temp->SetLink_Next(after);
+        temp->SetLink_Next(temp->GetLink_Next()->GetLink_Next());
+
    }
-}
+}   
 
 void SList::Reverse() {
     Node* current = head;
