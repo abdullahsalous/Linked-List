@@ -276,10 +276,6 @@ void SList::Add(int val, int idx) {
 void SList::Remove(int idx) {
     Node* temp;
     temp = head;
-    Node* before;
-    before = new Node();
-    Node* after;
-    after = new Node();
 
     if (idx > GetSize()) {
         while (temp->GetLink_Next()->GetLink_Next() != NULL) {
