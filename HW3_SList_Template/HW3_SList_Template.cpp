@@ -230,46 +230,27 @@ int SList::LinearSearch(int key) {
 }
 
 void SList::Add(int val, int idx) {
-    
-    Node* n;
-    n = new Node();
-    n->SetData(val);
 
-    if (GetHead() == NULL) {
-        head = n;
+    Node* insertNode = new Node();
+    insertNode->SetData(val);
+    insertNode->SetLink_Next(NULL);
+
+    if (head == NULL) {
+        head = insertNode;
     }
-    else if (idx != 0) {
-        if (idx > GetSize()) {
-            Node* temp = head;
-            Node* newN;
-            newN = new Node();
-            newN->SetData(val);
-            newN->SetLink_Next(NULL);
 
-            for (int i = 0; i < GetSize()-1; ++i) {
-                temp = temp->GetLink_Next();
-            }
-            temp->SetLink_Next(newN);
-        }
-        else {
-            Node* temp = head;
-            Node* element;
-            Node* elementAfter;
-            element = new Node();
-            element->SetData(val);
-            elementAfter = new Node();
-
-            for (int i = 0; i < idx - 1; ++i) {
-                temp = temp->GetLink_Next();
-                elementAfter = temp->GetLink_Next();
-            }
-            temp->SetLink_Next(element);
-            element->SetLink_Next(elementAfter);
-        }
+    else if (idx == 0) {
+        insertNode->SetLink_Next(head);
+        head = insertNode;
     }
+
     else {
-        n->SetLink_Next(head);
-        SetHead(n);
+        Node* temp = head;
+        for (int i = 0; i < idx - 1; ++i) {
+            temp = temp->GetLink_Next();
+        }
+        insertNode->SetLink_Next(temp->GetLink_Next());
+        temp->SetLink_Next(insertNode);
     }
 }
 
